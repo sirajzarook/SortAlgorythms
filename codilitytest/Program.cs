@@ -74,7 +74,11 @@ namespace codilitytest
 			Console.WriteLine($"------------------");
 
 			//---------------------
-			Console.ReadLine();
+
+			SelectionSort ss = new SelectionSort();
+			ss.Sort();
+			Console.WriteLine($"------------------");
+			
 
 			//---------------------
 			Console.ReadLine();
@@ -235,6 +239,44 @@ namespace codilitytest
 			}
 
 			return null;
+		}
+	}
+
+	public class SelectionSort {
+
+		public void Sort() {
+
+			int array_size = 10;
+			int[] array = new int[10] { 100, 50, 20, 40, 10, 60, 80, 70, 90, 30 };
+			string inputs = string.Join(", ", array.Select(x => x.ToString())); //Liqn online int list to string
+			Console.WriteLine($"The Array Before Selection Sort is: : {inputs}");
+	
+			//for (int i = 0; i < array_size; i++)
+			//{
+			//		Console.Write(array[i]);
+			//}
+			int tmp, min_key;
+
+			for (int j = 0; j < array_size - 1; j++)
+			{
+				min_key = j;
+
+				for (int k = j + 1; k < array_size; k++)
+				{
+					if (array[k] < array[min_key])
+					{
+						min_key = k;
+					}
+				}
+
+				tmp = array[min_key];
+				array[min_key] = array[j];
+				array[j] = tmp;
+			}
+
+			inputs = string.Join(", ", array.Select(x => x.ToString())); //Liqn online int list to string
+				Console.WriteLine($"The Array after Selection Sort is: : {inputs}");
+
 		}
 	}
 
