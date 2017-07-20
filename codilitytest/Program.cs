@@ -50,6 +50,7 @@ namespace codilitytest
 			foreach (int i in unsortedMS)
 				Console.Write($"{i},");
 			Console.WriteLine($"------------------");
+			//-----------------
 
 
 			//HeadSort
@@ -62,8 +63,22 @@ namespace codilitytest
 			Console.WriteLine($"------------------");
 			//-------------
 
+			//Two Sum
+			List<int> twoSum = new List<int> { 1, 3, 5, 7, 9 };
+			string inputTwoSum = string.Join(",", twoSum.Select(x => x.ToString())); //Liqn online int list to string
+			Console.WriteLine($"Two Sum : {inputTwoSum}");
+			TwoSum ts = new TwoSum();
+			Tuple<int, int> tuple;
+			tuple = ts.FindTwoSum(twoSum, 12);
+				Console.Write($"Sum of item {tuple.Item1} and item {tuple.Item2} which are {twoSum.ElementAt(tuple.Item1)} + {twoSum.ElementAt(tuple.Item2)}  = 12");
+			Console.WriteLine($"------------------");
+
 			//---------------------
 			Console.ReadLine();
+
+			//---------------------
+			Console.ReadLine();
+
 
 		}
 
@@ -202,8 +217,26 @@ namespace codilitytest
 					done = 1;
 			}
 		}
-	} 
+	}
 
+
+	public class TwoSum
+	{
+		public Tuple<int, int> FindTwoSum(IList<int> list, int sum)
+		{
+			var lookup = list.Select((x, i) => new { Index = i, Value = x })
+							 .ToLookup(x => x.Value, x => x.Index);
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				int diff = sum - list[i];
+				if (lookup.Contains(diff))
+					return Tuple.Create(i, lookup[diff].First());
+			}
+
+			return null;
+		}
+	}
 
 
 	//class Solution
