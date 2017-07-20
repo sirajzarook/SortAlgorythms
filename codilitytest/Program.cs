@@ -56,7 +56,7 @@ namespace codilitytest
 			//HeadSort
 			int[] arrHP = new int[] { 9, 8, 7, 6, 5, 4, 2, 1 };
 			HeadSort hs = new HeadSort();
-			int[] resultHP = hs.heapSort(arrHP, arrHP.Length );
+			int[] resultHP = hs.heapSort(arrHP, arrHP.Length);
 			Console.WriteLine($"HeadShort,");
 			foreach (int i in resultHP)
 				Console.Write($"{i},");
@@ -70,7 +70,7 @@ namespace codilitytest
 			TwoSum ts = new TwoSum();
 			Tuple<int, int> tuple;
 			tuple = ts.FindTwoSum(twoSum, 12);
-				Console.Write($"Sum of item {tuple.Item1} and item {tuple.Item2} which are {twoSum.ElementAt(tuple.Item1)} + {twoSum.ElementAt(tuple.Item2)}  = 12");
+			Console.Write($"Sum of item {tuple.Item1} and item {tuple.Item2} which are {twoSum.ElementAt(tuple.Item1)} + {twoSum.ElementAt(tuple.Item2)}  = 12");
 			Console.WriteLine($"------------------");
 
 			//---------------------
@@ -78,7 +78,7 @@ namespace codilitytest
 			SelectionSort ss = new SelectionSort();
 			ss.Sort();
 			Console.WriteLine($"------------------");
-			
+
 
 			//---------------------
 			Console.ReadLine();
@@ -250,7 +250,7 @@ namespace codilitytest
 			int[] array = new int[10] { 100, 50, 20, 40, 10, 60, 80, 70, 90, 30 };
 			string inputs = string.Join(", ", array.Select(x => x.ToString())); //Liqn online int list to string
 			Console.WriteLine($"The Array Before Selection Sort is: : {inputs}");
-	
+
 			//for (int i = 0; i < array_size; i++)
 			//{
 			//		Console.Write(array[i]);
@@ -275,10 +275,72 @@ namespace codilitytest
 			}
 
 			inputs = string.Join(", ", array.Select(x => x.ToString())); //Liqn online int list to string
-				Console.WriteLine($"The Array after Selection Sort is: : {inputs}");
+			Console.WriteLine($"The Array after Selection Sort is: : {inputs}");
 
 		}
 	}
+
+
+	//Codlity Test
+	public static class CodilityPrinterPix
+	{
+
+		//this was splitting the array it such that given in X has equal amount of matching values and unmatching values on both sideds of the given Array
+		// Test Case {5,5,2,7,3,2,5} number X = 5 then it slpits the Array at 4th position {5,5,2,7 || 3,2,5}
+		public static int solution3(int X, int[] A)
+		{
+
+			int ri = A.Length - 1; //right Pos
+
+			for (int li = 0; li < A.Length; li++)
+			{
+				if (A[li] == X)
+				{
+					for (int i = ri; i > li; ri--)
+					{
+						if (A[ri] != X)
+						{
+							ri = i - 1; //where did we left this
+							break;
+						}
+					}
+				}
+
+			}
+
+			return ri == A.Length - 1 ? A.Length : ri;
+		}
+
+		//Count all distinct pairs with difference equal to k
+		//Test case int[] A {3,5,6,3,3,5} returns 4 which are (0,3),(0,4),(1,5),(3,4)
+		public static int solution4(int[] A)
+		{
+			int i;
+			int j;
+			int identicalPairs;
+
+			Array.Sort(A);
+
+			identicalPairs = 0;
+			for (i = 0; i < A.Length - 1; i++)
+			{
+				for (j = i + 1; j < A.Length; j++)
+				{
+					if (A[i] == A[j])
+					{
+						identicalPairs++;
+					}
+					else
+					{
+						break;
+					}
+				}
+			}
+			return identicalPairs;
+		}
+
+	}
+
 
 
 	//class Solution
